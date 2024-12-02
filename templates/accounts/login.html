@@ -1,0 +1,33 @@
+<!-- templates/accounts/login.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login with Telegram</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <button id="telegram-login">Login with Telegram</button>
+
+    <script>
+        $(document).ready(function() {
+            $('#telegram-login').click(function() {
+                $.get('/generate-telegram-link/', function(data) {
+                    window.open(data.link, '_blank');
+                    checkAuth();
+                });
+            });
+
+            function checkAuth() {
+                var interval = setInterval(function() {
+                    $.get('/check-auth/', function(data) {
+                        if (data.authenticated) {
+                            clearInterval(interval);
+                            window.location.href = '/profile/';
+                        }
+                    });
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>

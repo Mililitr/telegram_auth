@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+</head>
+<body>
+    <h1>Welcome, {{ user.username }}!</h1>
+    {% if user.telegramuser %}
+        <p>Your Telegram username: {{ user.telegramuser.telegram_username }}</p>
+        <p>Telegram ID: {{ user.telegramuser.telegram_id }}</p>
+    {% endif %}
+</body>
+</html>
